@@ -1,0 +1,50 @@
+#rod1{
+	
+	background-color: blue;
+	top: 2px;
+}
+
+#rod2{
+	
+	top: 97.3vh;
+	background-color: red;
+}
+
+.common{
+	position: absolute;
+	height: 15px;
+	width: 150px;
+	/*border: 1px solid green;*/
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	border-radius: 10px;
+}
+
+#ball{
+	height: 20px;
+	width: 20px;
+	position: absolute;
+	top: 94vh;
+	background-color: black;
+	border-radius: 50%;
+	z-index: 2;
+}
+
+#start{
+	position: absolute;
+	/*border: 1px solid red;*/
+	left: 94%;
+	top: 47%;
+	width: 5%;
+	height: 5%;
+}
+
+
+body{
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
