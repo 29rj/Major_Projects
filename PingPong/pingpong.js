@@ -33,12 +33,18 @@ var keyPress = document.addEventListener("keypress",function(e){
 
 var one = false;
 
-var Lower = ball.getBoundingClientRect().top;
+var Lower = rod2.getBoundingClientRect().top - rod1.getBoundingClientRect().height;
 var Upper = rod1.getBoundingClientRect().top + rod1.getBoundingClientRect().height;
 var Left = 0 ;
 var Right = window.innerWidth - ball.getBoundingClientRect().width - 17; 
 
-console.log(ball);
+var ballX = ball.getBoundingClientRect().x;
+var ballY = ball.getBoundingClientRect().y;
+
+var rodX = rod1.getBoundingClientRect().x;
+
+var myName = prompt("Enter Your Name: ");
+var count = 0;
 
 start.onclick = function(){
 
@@ -53,10 +59,26 @@ start.onclick = function(){
 
 		let currY = ball.getBoundingClientRect().top;
 		let currX = ball.getBoundingClientRect().left;
-
-		console.log(currY,currX);
+		
+		// console.log(currY,currX);
 
 		if( currY < Upper || currY > Lower){
+
+			console.log("outside",currX,rod1.getBoundingClientRect().x);
+
+			if(currX <= (rod1.getBoundingClientRect().x)){
+				console.log("inside",currX,rod1.getBoundingClientRect().x);
+				start.style.display = "block";
+				alert(myName + " your score is: " + count);
+				ball.style.left = ballX+"px";
+				ball.style.top = ballY+"px";
+
+				rod1.style.left = rodX+"px";
+				rod2.style.left = rodX+"px";
+
+				clearInterval(startMoving);
+				return;
+			}
 
 			if(currY < Upper && ch){
 				ch = false;
@@ -64,6 +86,7 @@ start.onclick = function(){
 			}
 
 			changeY = -changeY;
+			count++;
 		}
 
 		if(currX < Left || currX >= Right){
@@ -73,6 +96,6 @@ start.onclick = function(){
 		ball.style.left =currX+changeX+"px";
 		ball.style.top  =currY+changeY+"px";
 	},100);
-
-	console.log("wowo");
 };
+
+
