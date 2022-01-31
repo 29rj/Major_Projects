@@ -36,7 +36,7 @@ var one = false;
 var Lower = ball.getBoundingClientRect().top;
 var Upper = rod1.getBoundingClientRect().top + rod1.getBoundingClientRect().height;
 var Left = 0 ;
-var Right = window.innerWidth - ball.getBoundingClientRect().width - 10; 
+var Right = window.innerWidth - ball.getBoundingClientRect().width - 17; 
 
 console.log(ball);
 
@@ -44,19 +44,25 @@ start.onclick = function(){
 
 	start.style.display = "none";
 
-	var changeX = 19;
+	var changeX = 20;
 	var changeY = -10;
 
-
+	var ch = true;
 
 	var startMoving = setInterval(function(){
 
-		let currY = ball.getBoundingClientRect().y;
-		let currX = ball.getBoundingClientRect().x;
+		let currY = ball.getBoundingClientRect().top;
+		let currX = ball.getBoundingClientRect().left;
 
 		console.log(currY,currX);
 
-		if( currY < Upper || currY > rod2.getBoundingClientRect().y + rod2.getBoundingClientRect().height){
+		if( currY < Upper || currY > Lower){
+
+			if(currY < Upper && ch){
+				ch = false;
+				Lower -= 10;
+			}
+
 			changeY = -changeY;
 		}
 
