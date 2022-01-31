@@ -34,6 +34,7 @@ var keyPress = document.addEventListener("keypress",function(e){
 var one = false;
 
 var Lower = rod2.getBoundingClientRect().top - rod1.getBoundingClientRect().height;
+var dummyLower = Lower;
 var Upper = rod1.getBoundingClientRect().top + rod1.getBoundingClientRect().height;
 var Left = 0 ;
 var Right = window.innerWidth - ball.getBoundingClientRect().width - 17; 
@@ -44,6 +45,7 @@ var ballY = ball.getBoundingClientRect().y;
 var rodX = rod1.getBoundingClientRect().x;
 
 var myName = prompt("Enter Your Name: ");
+localStorage.setItem(myName,0);
 var count = 0;
 
 start.onclick = function(){
@@ -66,15 +68,24 @@ start.onclick = function(){
 
 			console.log("outside",currX,rod1.getBoundingClientRect().x);
 
-			if(currX <= (rod1.getBoundingClientRect().x)){
-				console.log("inside",currX,rod1.getBoundingClientRect().x);
+			if(currX < rod1.getBoundingClientRect().x || currX > (rod1.getBoundingClientRect().x + rod1.getBoundingClientRect().width )){
+				
 				start.style.display = "block";
-				alert(myName + " your score is: " + count);
+				let highScore = localStorage.getItem(myName);
+				highScore = Math.max(parseInt(highScore) , parseInt(count));
+				localStorage.setItem(myName,highScore);
+
+				alert(myName + "'s Highest Score is: " + highScore + "\n Current score is: " + count);
+				
 				ball.style.left = ballX+"px";
 				ball.style.top = ballY+"px";
 
 				rod1.style.left = rodX+"px";
 				rod2.style.left = rodX+"px";
+
+				count = 0;
+				ch = true;
+				Lower = dummyLower;
 
 				clearInterval(startMoving);
 				return;
@@ -93,9 +104,10 @@ start.onclick = function(){
 			changeX = -changeX;
 		}
 
-		ball.style.left =currX+changeX+"px";
-		ball.style.top  =currY+changeY+"px";
-	},100);
+
+		ball.style.left = currX+changeX+"px";
+		ball.style.top  = currY+changeY+"px";
+	},50);
 };
 
 
